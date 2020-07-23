@@ -25,19 +25,19 @@
           <div class="col-md-4 ">
               <div class="status deposit">
                 <h5>deposit</h5>
-                <h2>$ <span id="displayDeposit">00</span></h2>
+                <h2>$ <span id="dipositInDisplay">00</span></h2>
               </div>
           </div>
           <div class="col-md-4 ">
               <div class="status withdraw">
                 <h5>withdraw</h5>
-                <h2>$ 33 </h2>
+                <h2>$ <span id="withdrawDisplay">33</span> </h2>
               </div>
           </div>
           <div class="col-md-4 ">
              <div class="status balance">
                 <h5>Balance</h5>
-                <h2>$ <span id="totalBalance">1200</span></h2>
+                <h2>$ <span id="totalAmount">1200</span></h2>
              </div>
           </div>
       </div>
@@ -47,7 +47,7 @@
                   <h5>deposit</h5>
                   <input  id="inputDiposit" type="text" class="form-control" placeholder="$ amount you want to withdraw">
                   <br>
-                  <button id="depositButton" class="btn btn-success">withdraw</button>
+                  <button id="dipositButton" class="btn btn-success">diposit</button>
               </div>
           </div>
           <div class="col-md-6">
@@ -55,7 +55,7 @@
                   <h5>withdraw</h5>
                   <input id="withdrawAmount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
                   <br>
-                  <button id="deposit" class="btn btn-success">deposit</button>
+                  <button id="withdraw" class="btn btn-success">withdraw</button>
               </div>
           </div>
       </div>
@@ -73,34 +73,65 @@
 
 
         // deposit area
-        const depositButton=document.getElementById('depositButton');
-        depositButton.addEventListener('click',function(){ 
+        const dipositButton=document.getElementById('dipositButton');
+        dipositButton.addEventListener('click',function(){ 
+        const convertFromUser=getInputAmount('inputDiposit');
 
+        //event of input deposite value     
+        // const inputFromUser=document.getElementById('inputDiposit').value;
+        // const convertFromUser=parseFloat(inputFromUser);
 
-
-        const inputButton=document.getElementById('inputDiposit').value;
-        const dipositConvert=parseFloat(inputButton);
-
-
-        const dipositInDisplay=document.getElementById('displayDeposit').innerText;
-        const displayDipositConvert=parseFloat(dipositInDisplay);
-
-
-        const totalDeposit=dipositConvert+displayDipositConvert;
-        document.getElementById('displayDeposit').innerText=totalDeposit;
+    //     //event of deposit display    
+    //     const receiveFromInput=document.getElementById('dipositInDisplay').innerText;
+    //     const convertFromInput=parseFloat(receiveFromInput);
+    //     const totalDeposit=convertFromUser+convertFromInput;
+    //     document.getElementById('dipositInDisplay').innerText=totalDeposit;
         
 
+    //     //  event of main balance area
+    //    const ownValue=document.getElementById('totalAmount').innerText;
+    //    const convertOwnValue=parseFloat(ownValue);
+    //    const totalBalance=convertFromUser+convertOwnValue;
+    //    document.getElementById('totalAmount').innerText=totalBalance;
 
 
 
-       const displayTotal=document.getElementById('displayTotalBalance').innerText;
-       const convertTONumber=parseFloat(displayTotal);
-       const totalBalance=dipositConvert+convertTONumber;
-       document.getElementById('displayTotalBalance').innerText=totalBalance;
-
-
+        amountCount('dipositInDisplay',convertFromUser);
+        amountCount('totalAmount',convertFromUser);
+    
         document.getElementById('inputDiposit').value="";
          })
+
+        const withdrawBtn=document.getElementById('withdraw');
+        withdrawBtn.addEventListener('click',function(){
+        const receiveWithdraw=getInputAmount('withdrawAmount');
+        amountCount('withdrawDisplay',receiveWithdraw);
+        amountCount('totalAmount',-1*receiveWithdraw);
+        // const receiveWithdraw=document.getElementById('withdrawAmount').value;   
+        // const convertReceiveWithdraw=parseFloat(receiveWithdraw);
+        
+        // const receiveWithdrawDisplay=document.getElementById('withdrawDisplay').innerText;
+        // const convertWithdrawDisplay=parseFloat(receiveWithdrawDisplay);
+        // const totalWithdraw=convertWithdrawDisplay+receiveWithdraw;
+        // document.getElementById('withdrawDisplay').innerText=totalWithdraw;
+
+        document.getElementById('withdrawAmount').value='';
+        })
+
+
+       function getInputAmount(id){
+        const inputAmount=document.getElementById(id).value;   
+        const convertInputAmount=parseFloat(inputAmount);
+        return convertInputAmount;
+       }
+
+
+       function amountCount(id,convertFromUser){
+       const detectAmount=document.getElementById(id).innerText;
+       const convertDetectAmount=parseFloat(detectAmount);
+       const totalBalance=convertDetectAmount+convertFromUser;
+       document.getElementById(id).innerText=totalBalance;
+         }
     </script>
 </body>
 </html>
